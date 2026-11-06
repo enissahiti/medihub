@@ -2,31 +2,110 @@
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MediHub</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MediHub | Studentët e Mjekësisë</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f2f7fa;color:#17324d}header{background:#087e91;color:white;padding:28px 18px;text-align:center}header h1{margin:0;font-size:34px}main{max-width:650px;margin:auto;padding:20px}.panel{background:white;padding:22px;border-radius:16px;margin:16px 0;box-shadow:0 3px 14px #0001}select,button{width:100%;padding:13px;margin:8px 0 17px;border:1px solid #cad6dc;border-radius:9px;font-size:16px}button{background:#087e91;color:white;border:0;font-weight:bold}label{font-weight:bold}.item{padding:15px;background:#eaf5f7;border-radius:10px;margin:10px 0}footer{text-align:center;padding:20px;color:#607080}
+:root{--navy:#10263d;--teal:#087f8c;--bg:#f3f7fb;--muted:#64748b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+header{background:linear-gradient(135deg,#10263d,#087f8c);color:white;padding:24px 20px 50px}
+.wrap{max-width:1000px;margin:auto}
+nav{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:800}
+.tag{font-size:12px;background:#ffffff25;padding:8px 12px;border-radius:30px}
+.hero{padding:45px 0 15px}
+.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.15;margin:0 0 15px}
+.hero p{color:#d9eef0;line-height:1.7}
+main{max-width:1000px;margin:-25px auto 0;padding:0 16px 50px;position:relative}
+.card{background:white;border:1px solid #e5edf3;border-radius:20px;padding:22px;margin-bottom:18px;box-shadow:0 8px 28px #10263d09}
+h2{font-size:21px;margin:0 0 18px}
+label{display:block;font-size:13px;font-weight:700;margin:15px 0 7px}
+select,input{width:100%;padding:14px;border:1px solid #d5e1e9;border-radius:11px;background:#f9fbfd;color:var(--navy);font-size:16px}
+button{border:0;border-radius:11px;padding:14px 18px;background:var(--teal);color:white;font-size:15px;font-weight:700;cursor:pointer}
+.primary{width:100%;margin-top:20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.feature{background:#f3f8fa;border:1px solid #e2eef0;padding:17px;border-radius:15px}
+.feature .emoji{font-size:26px}
+.feature h3{font-size:15px;margin:10px 0 6px}
+.feature p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.section-title{margin:28px 3px 15px}
+.resource{display:flex;align-items:center;gap:12px;background:#f3f8fa;border-radius:12px;padding:15px;margin:10px 0}
+.resource span{font-size:24px}
+.resource strong{display:block;font-size:14px}
+.resource small{color:var(--muted)}
+.note{font-size:13px;color:var(--muted);line-height:1.6}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+[hidden]{display:none!important}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.hero{padding:70px 0 30px}.card{padding:30px}}
 </style>
 </head>
 <body>
-<header><h1>🩺 MediHub</h1><p>Gjithçka për studentët e mjekësisë</p></header>
-<main>
-<div class="panel">
-<h2>Gjej materialet mësimore</h2>
-<label>Drejtimi</label>
-<select id="drejtimi"><option>Mjekësi e Përgjithshme</option><option>Stomatologji</option><option>Farmaci</option><option>Infermieri</option></select>
-<label>Viti</label>
-<select id="viti" onchange="ndrysho()"><option value="1">Viti I</option><option value="2">Viti II</option><option value="3">Viti III</option></select>
-<label>Lënda</label><select id="lenda"></select>
-<button onclick="shfaq()">Shfaq materialet</button>
+<header>
+<div class="wrap">
+<nav><div class="logo">🩺 MediHub</div><div class="tag">Versioni 2.0</div></nav>
+<div class="hero">
+<h1>Mëso më lehtë.<br>Arrij më shumë.</h1>
+<p>Hapësira jote digjitale për materiale, teste dhe organizimin e studimeve në Fakultetin e Mjekësisë.</p>
 </div>
-<div class="panel" id="rezultati" hidden></div>
-<div class="panel"><h2>Funksionet e MediHub</h2><div class="item">📚 Biblioteka digjitale</div><div class="item">📝 MediExam – Teste</div><div class="item">🧠 MediCards – Flashcards</div><div class="item">📅 MediPlan – Planifikimi</div></div>
-</main><footer>MediHub © 2026</footer>
+</div>
+</header>
+<main>
+<section class="card">
+<h2>🔎 Gjej materialet mësimore</h2>
+<label for="drejtimi">Drejtimi</label>
+<select id="drejtimi">
+<option>Mjekësi e Përgjithshme</option>
+<option>Stomatologji</option>
+<option>Farmaci</option>
+<option>Infermieri</option>
+<option>Mami</option>
+</select>
+<label for="viti">Viti i studimeve</label>
+<select id="viti" onchange="ndrysho()">
+<option value="1">Viti I</option>
+<option value="2">Viti II</option>
+<option value="3">Viti III</option>
+</select>
+<label for="lenda">Lënda</label>
+<select id="lenda"></select>
+<button class="primary" onclick="shfaq()">Shfaq materialet →</button>
+</section>
+<section class="card" id="rezultati" hidden aria-live="polite"></section>
+<h2 class="section-title">Gjithçka që të duhet</h2>
+<div class="grid">
+<div class="feature"><div class="emoji">📚</div><h3>MediLibrary</h3><p>Libra, skripta dhe ligjërata sipas lëndës.</p></div>
+<div class="feature"><div class="emoji">📝</div><h3>MediExam</h3><p>Teste dhe pyetje për përgatitje.</p></div>
+<div class="feature"><div class="emoji">🧠</div><h3>MediCards</h3><p>Kartela për përsëritjen e njohurive.</p></div>
+<div class="feature"><div class="emoji">📅</div><h3>MediPlan</h3><p>Organizo mësimin dhe provimet.</p></div>
+</div>
+<section class="card" style="margin-top:22px">
+<h2>🎓 Mirë se erdhe në MediHub</h2>
+<p class="note">Kjo platformë po zhvillohet për studentët e Fakultetit të Mjekësisë. Materialet do të shtohen gradualisht. Lëndët e para janë demonstrative dhe do të përshtaten me planprogramet përkatëse.</p>
+</section>
+</main>
+<footer>MediHub © 2026 • Krijuar për studentët e mjekësisë</footer>
 <script>
-const lendet={"1":["Anatomi","Histologji","Biologji Mjekësore"],"2":["Fiziologji","Biokimi","Embriologji"],"3":["Patologji","Mikrobiologji","Farmakologji"]};
-function ndrysho(){let v=document.getElementById("viti").value;document.getElementById("lenda").innerHTML=lendet[v].map(x=>'<option>'+x+'</option>').join("");}
-function shfaq(){let l=document.getElementById("lenda").value;let r=document.getElementById("rezultati");r.hidden=false;r.innerHTML="<h2>"+l+"</h2><p>📚 Librat dhe tekstet</p><p>📄 Skriptat dhe ligjëratat</p><p>📝 Pyetjet e provimeve</p><p>Materialet do të shtohen së shpejti.</p>";}
+const lendet={
+"1":["Anatomi","Histologji","Biologji Mjekësore"],
+"2":["Fiziologji","Biokimi","Embriologji"],
+"3":["Patologji","Mikrobiologji","Farmakologji"]
+};
+function ndrysho(){
+const v=document.getElementById("viti").value;
+document.getElementById("lenda").innerHTML=lendet[v].map(x=>"<option>"+x+"</option>").join("");
+document.getElementById("rezultati").hidden=true;
+}
+function shfaq(){
+const l=document.getElementById("lenda").value;
+const r=document.getElementById("rezultati");
+r.innerHTML="<h2>📖 "+l+"</h2>"+
+'<div class="resource"><span>📚</span><div><strong>Libra dhe tekste</strong><small>Materialet do të shtohen së shpejti</small></div></div>'+
+'<div class="resource"><span>📄</span><div><strong>Skripta dhe ligjërata</strong><small>Materialet do të shtohen së shpejti</small></div></div>'+
+'<div class="resource"><span>📝</span><div><strong>Pyetje për provime</strong><small>Materialet do të shtohen së shpejti</small></div></div>';
+r.hidden=false;
+r.scrollIntoView({behavior:"smooth",block:"start"});
+}
 ndrysho();
 </script>
-</body></html>
+</body>
+</html>
